@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Satvik Fruits Supplier— Pure from the Orchard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,800;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --forest:   #1A3D2B;
+      --forest-deep: #0F2418;
+      --gold:     #E8971C;
+      --gold-lt:  #F5C45E;
+      --cream:    #FAF6EE;
+      --sage:     #8BAE8A;
+      --charcoal: #1C1C1C;
+      --warm-gray:#7A7264;
+      --white:    #FFFFFF;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--charcoal);
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5vw;
+      height: 72px;
+      background: rgba(26,61,43,0.97);
+      backdrop-filter: blur(10px);
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: 10px;
+      text-decoration: none;
+    }
+    .nav-logo .logo-icon {
+      width: 38px; height: 38px;
+      background: var(--gold);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px;
+    }
+    .nav-logo span {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem; font-weight: 700;
+      color: var(--white); letter-spacing: 0.02em;
+    }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a {
+      color: rgba(255,255,255,0.8); text-decoration: none;
+      font-size: 0.9rem; font-weight: 500; letter-spacing: 0.05em;
+      text-transform: uppercase; transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--gold-lt); }
+    .nav-cta {
+      background: var(--gold); color: var(--forest-deep);
+      padding: 10px 22px; border-radius: 30px;
+      font-weight: 600; font-size: 0.88rem; text-decoration: none;
+      letter-spacing: 0.04em; transition: background .2s, transform .15s;
+    }
+    .nav-cta:hover { background: var(--gold-lt); transform: translateY(-1px); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      padding-top: 72px;
+    }
+    .hero-left {
+      background: var(--forest);
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 80px 6vw 80px 8vw;
+      position: relative; overflow: hidden;
+    }
+    .hero-left::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='30' cy='30' r='1.5' fill='rgba(139,174,138,0.15)'/%3E%3C/svg%3E");
+      pointer-events: none;
+    }
+    .hero-eyebrow {
+      font-size: 0.78rem; font-weight: 600; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: 20px; display: flex; align-items: center; gap: 10px;
+    }
+    .hero-eyebrow::after {
+      content: ''; flex: 0 0 40px; height: 1px; background: var(--gold);
+    }
+    .hero-h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.6rem, 5vw, 4rem);
+      font-weight: 800; line-height: 1.1;
+      color: var(--white); margin-bottom: 24px;
+    }
+    .hero-h1 em { font-style: italic; color: var(--gold-lt); }
+    .hero-sub {
+      font-size: 1.05rem; line-height: 1.7;
+      color: rgba(255,255,255,0.72); max-width: 400px;
+      margin-bottom: 44px;
+    }
+    .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
+    .btn-primary {
+      background: var(--gold); color: var(--forest-deep);
+      padding: 14px 30px; border-radius: 30px;
+      font-weight: 700; font-size: 0.95rem; text-decoration: none;
+      transition: all .2s; display: inline-flex; align-items: center; gap: 8px;
+    }
+    .btn-primary:hover { background: var(--gold-lt); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(232,151,28,0.35); }
+    .btn-ghost {
+      color: rgba(255,255,255,0.85); font-size: 0.9rem; font-weight: 500;
+      text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+      transition: color .2s;
+    }
+    .btn-ghost:hover { color: var(--gold-lt); }
+    .btn-ghost .arrow { font-size: 1.1rem; }
+
+    .hero-stats {
+      margin-top: 56px; display: flex; gap: 36px;
+      border-top: 1px solid rgba(255,255,255,0.1); padding-top: 36px;
+    }
+    .stat-val {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem; font-weight: 800; color: var(--gold-lt);
+    }
+    .stat-label {
+      font-size: 0.78rem; text-transform: uppercase;
+      letter-spacing: 0.12em; color: rgba(255,255,255,0.5);
+      margin-top: 2px;
+    }
+
+    .hero-right {
+      position: relative; overflow: hidden;
+    }
+    .hero-right img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center;
+    }
+    .hero-right::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(26,61,43,0.2) 0%, transparent 60%);
+    }
+    .fruit-badge {
+      position: absolute; bottom: 40px; left: 40px; z-index: 2;
+      background: rgba(26,61,43,0.92); backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 16px; padding: 16px 20px;
+      display: flex; align-items: center; gap: 14px;
+    }
+    .badge-icon { font-size: 2rem; }
+    .badge-text strong { display: block; color: var(--white); font-size: 0.9rem; font-weight: 600; }
+    .badge-text span { color: rgba(255,255,255,0.6); font-size: 0.78rem; }
+
+    /* ── MARQUEE ── */
+    .marquee-strip {
+      background: var(--gold); overflow: hidden;
+      padding: 14px 0; white-space: nowrap;
+    }
+    .marquee-inner {
+      display: inline-flex; gap: 0;
+      animation: marquee 28s linear infinite;
+    }
+    .marquee-item {
+      display: inline-flex; align-items: center; gap: 12px;
+      padding: 0 32px;
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem; font-weight: 600;
+      color: var(--forest-deep); letter-spacing: 0.04em;
+    }
+    .marquee-item .dot { width: 6px; height: 6px; background: var(--forest); border-radius: 50%; }
+    @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    /* ── INTRO ── */
+    .intro {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 80px;
+      padding: 100px 8vw; align-items: center;
+    }
+    .intro-images {
+      position: relative; height: 520px;
+    }
+    .intro-img-main {
+      position: absolute; top: 0; left: 0;
+      width: 70%; height: 80%;
+      border-radius: 24px; overflow: hidden;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.14);
+    }
+    .intro-img-accent {
+      position: absolute; bottom: 0; right: 0;
+      width: 55%; height: 60%;
+      border-radius: 20px; overflow: hidden;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.12);
+      border: 6px solid var(--cream);
+    }
+    .intro-img-main img, .intro-img-accent img {
+      width: 100%; height: 100%; object-fit: cover;
+    }
+    .intro-leaf {
+      position: absolute; top: 40%; left: 63%;
+      width: 56px; height: 56px; background: var(--gold);
+      border-radius: 50%; display: flex; align-items: center;
+      justify-content: center; font-size: 1.6rem; z-index: 2;
+      box-shadow: 0 8px 24px rgba(232,151,28,0.4);
+      animation: float 4s ease-in-out infinite;
+    }
+    @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+
+    .intro-text .section-eyebrow {
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--gold);
+      display: flex; align-items: center; gap: 10px; margin-bottom: 18px;
+    }
+    .intro-text .section-eyebrow::before { content:''; width:32px; height:2px; background:var(--gold); }
+    .intro-text h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 3.5vw, 2.9rem);
+      font-weight: 800; line-height: 1.15;
+      color: var(--forest); margin-bottom: 22px;
+    }
+    .intro-text h2 em { font-style: italic; color: var(--gold); }
+    .intro-text p {
+      font-size: 1rem; line-height: 1.8; color: var(--warm-gray);
+      margin-bottom: 18px;
+    }
+    .feature-list { list-style: none; margin-top: 28px; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .feature-list li {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 0.88rem; font-weight: 500; color: var(--charcoal);
+    }
+    .feature-list li .check {
+      width: 22px; height: 22px; background: rgba(26,61,43,0.1);
+      border-radius: 50%; display: flex; align-items: center;
+      justify-content: center; font-size: 0.65rem; color: var(--forest);
+      flex-shrink: 0;
+    }
+
+    /* ── PRODUCTS ── */
+    .products { padding: 100px 8vw; background: var(--forest); }
+    .section-header { text-align: center; margin-bottom: 60px; }
+    .section-header .section-eyebrow {
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--gold);
+      display: flex; align-items: center; justify-content: center; gap: 12px;
+      margin-bottom: 16px;
+    }
+    .section-header .section-eyebrow::before,
+    .section-header .section-eyebrow::after { content:''; width:32px; height:1px; background:var(--gold); }
+    .section-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 3.5vw, 2.8rem);
+      font-weight: 800; line-height: 1.2;
+      color: var(--white);
+    }
+    .section-header h2 em { font-style: italic; color: var(--gold-lt); }
+    .section-header p {
+      font-size: 0.98rem; color: rgba(255,255,255,0.6);
+      margin-top: 14px; max-width: 520px; margin-inline: auto; line-height: 1.7;
+    }
+
+    .products-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+    }
+    .product-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 20px; overflow: hidden;
+      transition: transform .25s, box-shadow .25s;
+      cursor: pointer;
+    }
+    .product-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 48px rgba(0,0,0,0.3);
+    }
+    .product-card:nth-child(1) { grid-column: span 2; }
+    .product-img {
+      width: 100%; aspect-ratio: 4/3;
+      object-fit: cover; display: block;
+      transition: transform .4s;
+    }
+    .product-card:nth-child(1) .product-img { aspect-ratio: 16/7; }
+    .product-card:hover .product-img { transform: scale(1.04); }
+    .product-info { padding: 22px 24px; }
+    .product-tag {
+      display: inline-block; background: rgba(232,151,28,0.15);
+      color: var(--gold-lt); font-size: 0.72rem;
+      font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; padding: 4px 12px;
+      border-radius: 20px; margin-bottom: 10px;
+    }
+    .product-info h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.35rem; font-weight: 700;
+      color: var(--white); margin-bottom: 8px;
+    }
+    .product-info p {
+      font-size: 0.88rem; color: rgba(255,255,255,0.55);
+      line-height: 1.65;
+    }
+    .product-footer {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-top: 18px; padding-top: 18px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+    .product-price {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem; font-weight: 700; color: var(--gold-lt);
+    }
+    .product-price span { font-size: 0.75rem; font-weight: 400; color: rgba(255,255,255,0.4); }
+    .btn-order {
+      background: var(--gold); color: var(--forest-deep);
+      padding: 9px 18px; border-radius: 20px;
+      font-weight: 700; font-size: 0.82rem; text-decoration: none;
+      transition: all .2s;
+    }
+    .btn-order:hover { background: var(--gold-lt); transform: translateY(-1px); }
+
+    /* ── PROCESS ── */
+    .process { padding: 100px 8vw; }
+    .process-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 36px;
+      margin-top: 60px;
+    }
+    .process-step { text-align: center; }
+    .step-icon {
+      width: 72px; height: 72px; margin: 0 auto 20px;
+      background: var(--forest); border-radius: 20px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.8rem; box-shadow: 0 8px 24px rgba(26,61,43,0.2);
+    }
+    .step-num {
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.15em;
+      text-transform: uppercase; color: var(--sage); margin-bottom: 8px;
+    }
+    .process-step h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem; font-weight: 700;
+      color: var(--charcoal); margin-bottom: 10px;
+    }
+    .process-step p {
+      font-size: 0.87rem; color: var(--warm-gray); line-height: 1.7;
+    }
+    .connector {
+      position: relative;
+    }
+    .connector::after {
+      content: '→';
+      position: absolute; top: 36px; right: -24px;
+      color: var(--sage); font-size: 1.4rem; z-index: 1;
+    }
+    .connector:last-child::after { display: none; }
+
+    /* ── TESTIMONIALS ── */
+    .testimonials {
+      padding: 100px 8vw;
+      background: linear-gradient(160deg, #f0ebe0 0%, var(--cream) 100%);
+    }
+    .reviews-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+      margin-top: 60px;
+    }
+    .review-card {
+      background: var(--white); border-radius: 20px;
+      padding: 32px 28px; box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+      transition: transform .2s;
+    }
+    .review-card:hover { transform: translateY(-4px); }
+    .stars { color: var(--gold); font-size: 0.9rem; letter-spacing: 2px; margin-bottom: 16px; }
+    .review-text {
+      font-size: 0.95rem; line-height: 1.8;
+      color: var(--charcoal); margin-bottom: 22px;
+      font-style: italic;
+    }
+    .reviewer {
+      display: flex; align-items: center; gap: 12px;
+      border-top: 1px solid #eee; padding-top: 18px;
+    }
+    .reviewer-avatar {
+      width: 42px; height: 42px; border-radius: 50%;
+      background: var(--forest); display: flex; align-items: center;
+      justify-content: center; font-size: 1.1rem; flex-shrink: 0;
+    }
+    .reviewer strong { display: block; font-size: 0.9rem; font-weight: 600; }
+    .reviewer span { font-size: 0.78rem; color: var(--warm-gray); }
+
+    /* ── WHY US ── */
+    .why {
+      padding: 100px 8vw;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+    }
+    .why-text h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 3.2vw, 2.8rem);
+      font-weight: 800; line-height: 1.15;
+      color: var(--forest); margin-bottom: 20px;
+    }
+    .why-text h2 em { font-style: italic; color: var(--gold); }
+    .why-text p {
+      font-size: 0.98rem; color: var(--warm-gray); line-height: 1.8; margin-bottom: 16px;
+    }
+    .why-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .why-card {
+      background: var(--cream); border-radius: 16px;
+      padding: 24px 22px; border: 1px solid rgba(0,0,0,0.06);
+      transition: box-shadow .2s;
+    }
+    .why-card:hover { box-shadow: 0 8px 28px rgba(0,0,0,0.1); }
+    .why-icon { font-size: 1.8rem; margin-bottom: 12px; }
+    .why-card h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem; font-weight: 700; color: var(--forest); margin-bottom: 6px;
+    }
+    .why-card p { font-size: 0.82rem; color: var(--warm-gray); line-height: 1.65; }
+
+    /* ── CTA BAND ── */
+    .cta-band {
+      margin: 0 6vw 80px; border-radius: 28px;
+      background: var(--forest);
+      padding: 72px 8vw;
+      display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 40px;
+      position: relative; overflow: hidden;
+    }
+    .cta-band::before {
+      content: '🍋';
+      position: absolute; right: 200px; top: -20px;
+      font-size: 8rem; opacity: 0.07;
+      transform: rotate(-15deg);
+    }
+    .cta-band::after {
+      content: '🥭';
+      position: absolute; right: 60px; bottom: -20px;
+      font-size: 9rem; opacity: 0.07;
+      transform: rotate(20deg);
+    }
+    .cta-text h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      font-weight: 800; color: var(--white); margin-bottom: 12px;
+    }
+    .cta-text h2 em { font-style: italic; color: var(--gold-lt); }
+    .cta-text p { font-size: 0.98rem; color: rgba(255,255,255,0.65); line-height: 1.7; }
+    .cta-actions { display: flex; flex-direction: column; gap: 12px; align-items: flex-end; }
+    .btn-large {
+      background: var(--gold); color: var(--forest-deep);
+      padding: 16px 36px; border-radius: 30px;
+      font-weight: 700; font-size: 1rem; text-decoration: none;
+      white-space: nowrap; transition: all .2s;
+    }
+    .btn-large:hover { background: var(--gold-lt); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(232,151,28,0.4); }
+    .cta-sub {
+      font-size: 0.8rem; color: rgba(255,255,255,0.5); text-align: center;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--forest-deep);
+      padding: 60px 8vw 30px;
+    }
+    .footer-top {
+      display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: 48px; padding-bottom: 48px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .footer-brand .logo-icon {
+      width: 44px; height: 44px; background: var(--gold); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px; margin-bottom: 14px;
+    }
+    .footer-brand h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem; font-weight: 700; color: var(--white); margin-bottom: 12px;
+    }
+    .footer-brand p {
+      font-size: 0.87rem; color: rgba(255,255,255,0.5); line-height: 1.8;
+    }
+    .footer-col h4 {
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 0.15em;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: 18px;
+    }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 11px; }
+    .footer-col a {
+      font-size: 0.88rem; color: rgba(255,255,255,0.55);
+      text-decoration: none; transition: color .2s;
+    }
+    .footer-col a:hover { color: var(--gold-lt); }
+    .footer-bottom {
+      display: flex; justify-content: space-between; align-items: center;
+      padding-top: 28px;
+      font-size: 0.8rem; color: rgba(255,255,255,0.3);
+    }
+    .social-links { display: flex; gap: 14px; }
+    .social-btn {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: rgba(255,255,255,0.08); display: flex; align-items: center;
+      justify-content: center; font-size: 0.9rem; text-decoration: none;
+      transition: background .2s;
+    }
+    .social-btn:hover { background: var(--gold); }
+
+    /* ── MOBILE ── */
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; }
+      .hero-right { height: 40vh; }
+      .intro { grid-template-columns: 1fr; }
+      .intro-images { height: 320px; }
+      .products-grid { grid-template-columns: 1fr 1fr; }
+      .product-card:nth-child(1) { grid-column: span 2; }
+      .process-grid { grid-template-columns: 1fr 1fr; }
+      .connector::after { display: none; }
+      .reviews-grid { grid-template-columns: 1fr; }
+      .why { grid-template-columns: 1fr; }
+      .cta-band { grid-template-columns: 1fr; }
+      .cta-actions { align-items: flex-start; }
+      .footer-top { grid-template-columns: 1fr 1fr; }
+      .nav-links { display: none; }
+    }
+    @media (max-width: 560px) {
+      .products-grid { grid-template-columns: 1fr; }
+      .product-card:nth-child(1) { grid-column: span 1; }
+      .why-cards { grid-template-columns: 1fr; }
+      .footer-top { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="logo-icon">🍃</div>
+    <span>Satvik Fruits Supplier</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#products">Our Fruits</a></li>
+    <li><a href="#process">Farm Process</a></li>
+    <li><a href="#about">Our Story</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#order" class="nav-cta">Order Now</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">Farm Direct · No Middleman</div>
+    <h1 class="hero-h1">
+      <em>Pure Fruits</em><br>
+      Straight from<br>
+      Our Orchards
+    </h1>
+    <p class="hero-sub">
+      Handpicked at peak ripeness, delivered within 24 hours. Zero chemicals, zero compromise — only the way nature intended.
+    </p>
+    <div class="hero-actions">
+      <a href="#products" class="btn-primary">🛒 Shop the Season</a>
+      <a href="#process" class="btn-ghost"><span class="arrow">▶</span> Watch Farm Story</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-val">12+</div>
+        <div class="stat-label">Fruit Varieties</div>
+      </div>
+      <div>
+        <div class="stat-val">25K+</div>
+        <div class="stat-label">Happy Families</div>
+      </div>
+      <div>
+        <div class="stat-val">100%</div>
+        <div class="stat-label">Organic Certified</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <img
+      src="https://images.unsplash.com/photo-1619566636858-adf3ef46400b?w=900&q=80&fit=crop"
+      alt="Fresh tropical fruits on a wooden surface"
+      loading="eager"
+    />
+    <div class="fruit-badge">
+      <div class="badge-icon">🥭</div>
+      <div class="badge-text">
+        <strong>Alphonso Mangoes</strong>
+        <span>Now in Season · Limited Stock</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-strip">
+  <div class="marquee-inner">
+    <span class="marquee-item">🥭 Alphonso Mangoes <span class="dot"></span></span>
+    <span class="marquee-item">🍇 Black Grapes <span class="dot"></span></span>
+    <span class="marquee-item">🥥 Tender Coconut <span class="dot"></span></span>
+    <span class="marquee-item">🍌 Nendran Banana <span class="dot"></span></span>
+    <span class="marquee-item">🍋 Kagzi Lemon <span class="dot"></span></span>
+    <span class="marquee-item">🍈 Sweet Melon <span class="dot"></span></span>
+    <span class="marquee-item">🥝 Kiwi <span class="dot"></span></span>
+    <span class="marquee-item">🍑 Chikoo / Sapodilla <span class="dot"></span></span>
+    <!-- duplicate for seamless loop -->
+    <span class="marquee-item">🥭 Alphonso Mangoes <span class="dot"></span></span>
+    <span class="marquee-item">🍇 Black Grapes <span class="dot"></span></span>
+    <span class="marquee-item">🥥 Tender Coconut <span class="dot"></span></span>
+    <span class="marquee-item">🍌 Nendran Banana <span class="dot"></span></span>
+    <span class="marquee-item">🍋 Kagzi Lemon <span class="dot"></span></span>
+    <span class="marquee-item">🍈 Sweet Melon <span class="dot"></span></span>
+    <span class="marquee-item">🥝 Kiwi <span class="dot"></span></span>
+    <span class="marquee-item">🍑 Chikoo / Sapodilla <span class="dot"></span></span>
+  </div>
+</div>
+
+<!-- INTRO / ABOUT -->
+<section class="intro" id="about">
+  <div class="intro-images">
+    <div class="intro-img-main">
+      <img src="./imgs/brigitte-tohm-J91jD9u6Nk4-unsplash.jpg" alt="Farm orchard with lush trees" />
+    </div>
+    <div class="intro-img-accent">
+      <img src="https://images.unsplash.com/photo-1490885578174-acda8905c2c6?w=500&q=80&fit=crop" alt="Colorful fresh fruit basket" />
+    </div>
+    <div class="intro-leaf">🌿</div>
+  </div>
+  <div class="intro-text">
+    <div class="section-eyebrow">Our Philosophy</div>
+    <h2>Grown with <em>love</em>, delivered with purpose</h2>
+    <p>
+      Satvik Fruits was born from a single belief: that eating a fruit should feel like biting into nature itself — no wax coating, no ripening chambers, no cold-store aftertaste.
+    </p>
+    <p>
+      We cultivate over 15 acres of mixed-fruit orchards in the Konkan belt and the Deccan plateau, using traditional Indian farming wisdom alongside modern organic practices.
+    </p>
+    <ul class="feature-list">
+      <li><div class="check">✓</div> No artificial ripening</li>
+      <li><div class="check">✓</div> Harvested on order</li>
+      <li><div class="check">✓</div> 24-hour farm-to-door</li>
+      <li><div class="check">✓</div> Free delivery in Pune</li>
+    </ul>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="products" id="products">
+  <div class="section-header">
+    <div class="section-eyebrow">What We Grow</div>
+    <h2>This Season's <em>Finest</em> Harvest</h2>
+    <p>Every variety is picked at its peak — not a day before, never a day after. Limited quantities available each week.</p>
+  </div>
+  <div class="products-grid">
+
+    <!-- Card 1 – wide -->
+    <div class="product-card">
+      <img class="product-img" src="./imgs/2.2-About-Devgad-Taluka.jpg" alt="Alphonso Mangoes" />
+      <div class="product-info">
+        <span class="product-tag">⭐ Bestseller</span>
+        <h3>Alphonso Devgad Happuse</h3>
+        <p>India's most celebrated mango — saffron-yellow, honey-sweet with a silky, fibre-free pulp. GI-tagged from Ratnagiri orchards.</p>
+        <div class="product-footer">
+          <a href="#order" class="btn-order">Order Now</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="product-card">
+      <img class="product-img" src="./imgs/alpha.jfif" alt="Fresh Coconuts" />
+      <div class="product-info">
+        <span class="product-tag">Refreshing</span>
+        <h3>Alphonso Mango (Hapus)</h3>
+        <p>Naturally electrolyte-rich, straight from the tree.</p>
+        <div class="product-footer">
+          <a href="#order" class="btn-order">Order Now</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="product-card">
+      <img class="product-img" src="./imgs/image.png" alt="Fresh Guavas" />
+      <div class="product-info">
+        <span class="product-tag">Seasonal</span>
+        <h3>Alphonso Ratna Happuse</h3>
+        <p>Crisp yellow flesh, mild sweetness </p>
+        <div class="product-footer">
+          <a href="#order" class="btn-order">Order Now</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 4 -->
+    <!-- <div class="product-card">
+      <img class="product-img" src="https://images.unsplash.com/photo-1515706886582-54c73c5eaf41?w=500&q=80&fit=crop" alt="Bananas" />
+      <div class="product-info">
+        <span class="product-tag">Daily Essential</span>
+        <h3>Nendran Banana</h3>
+        <p>Kerala's prized variety — dense, aromatic, and perfect for prasad.</p>
+        <div class="product-footer">
+          <div class="product-price">₹120 <span>/ dozen</span></div>
+          <a href="#order" class="btn-order">Order Now</a>
+        </div>
+      </div>
+    </div> -->
+
+    <!-- Card 5 -->
+    <!-- <div class="product-card">
+      <img class="product-img" src="https://images.unsplash.com/photo-1519162808019-7de1683fa2ad?w=500&q=80&fit=crop" alt="Chikoo Sapodilla" />
+      <div class="product-info">
+        <span class="product-tag">Rare Variety</span>
+        <h3>Chikoo / Sapodilla</h3>
+        <p>Brown-skinned and caramel-sweet — a childhood favourite, grown right here.</p>
+        <div class="product-footer">
+          <div class="product-price">₹149 <span>/ kg</span></div>
+          <a href="#order" class="btn-order">Order Now</a>
+        </div>
+      </div>
+    </div> -->
+
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process" id="process">
+  <div class="section-header">
+    <div class="section-eyebrow">Farm to Doorstep</div>
+    <h2>From Orchard to <em>Your Table</em></h2>
+    <p>Every order triggers a fresh pick. No warehouses, no delays.</p>
+  </div>
+  <div class="process-grid">
+    <div class="process-step connector">
+      <div class="step-icon">🌱</div>
+      <div class="step-num">Step 01</div>
+      <h3>Organic Cultivation</h3>
+      <p>We use compost, neem-cake, and traditional intercropping. Zero synthetic pesticides — ever.</p>
+    </div>
+    <div class="process-step connector">
+      <div class="step-icon">🤲</div>
+      <div class="step-num">Step 02</div>
+      <h3>Hand-picked at Peak</h3>
+      <p>Our farmers hand-select each fruit at the precise moment of ripeness, based on colour, aroma, and touch.</p>
+    </div>
+    <div class="process-step connector">
+      <div class="step-icon">📦</div>
+      <div class="step-num">Step 03</div>
+      <h3>Gentle Packing</h3>
+      <p>Fruits are cushioned in eco-friendly banana-leaf lining and corrugated boxes to survive transit without bruising.</p>
+    </div>
+    <div class="process-step">
+      <div class="step-icon">🚚</div>
+      <div class="step-num">Step 04</div>
+      <h3>24-Hour Delivery</h3>
+      <p>Express logistics to your doorstep within 24 hours of picking. Track live from your phone.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <div class="section-header">
+    <div class="section-eyebrow">Customer Love</div>
+    <h2>Families Who <em>Trust</em> Us</h2>
+    <p>Over 5,000 families across India have made Satvik their weekly fruit source.</p>
+  </div>
+  <div class="reviews-grid">
+    <div class="review-card">
+      <div class="stars">★★★★★</div>
+      <p class="review-text">"The Alphonso mangoes arrived perfectly ripe — not a single bruise. The flavour was unlike anything from a supermarket. My family finished 2 dozen in 3 days!"</p>
+      <div class="reviewer">
+        <div class="reviewer-avatar">🙍‍♀️</div>
+        <div>
+          <strong>Priya Deshmukh</strong>
+          <span>Mumbai · Regular Customer</span>
+        </div>
+      </div>
+    </div>
+    <div class="review-card">
+      <div class="stars">★★★★★</div>
+      <p class="review-text">"I've been ordering weekly for 6 months. The Nendran bananas are divine. Knowing they're grown without chemicals gives real peace of mind for my kids."</p>
+      <div class="reviewer">
+        <div class="reviewer-avatar">👨‍👩‍👧</div>
+        <div>
+          <strong>Arun & Kavitha Nair</strong>
+          <span>Pune · Family Subscription</span>
+        </div>
+      </div>
+    </div>
+    <div class="review-card">
+      <div class="stars">★★★★★</div>
+      <p class="review-text">"Finally found a supplier who actually sends what they describe. The tender coconuts are incredible — so much more refreshing than anything from a vendor trolley."</p>
+      <div class="reviewer">
+        <div class="reviewer-avatar">👩‍💼</div>
+        <div>
+          <strong>Sneha Patil</strong>
+          <span>Nashik · Bulk Orders</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="why">
+  <div class="why-text">
+    <div class="section-eyebrow" style="font-size:0.75rem;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:10px;margin-bottom:18px;">
+      <span style="width:32px;height:2px;background:var(--gold);display:inline-block;"></span>
+      Why Satvik
+    </div>
+    <h2>The difference you can <em>taste</em> and trust</h2>
+    <p>
+      Most fruit sold in India travels 5–7 days in cold storage and is treated with ethylene gas to ripen artificially. We never do that.
+    </p>
+    <p>
+      Satvik means "pure" in Sanskrit. It's not just our name — it's the standard we hold every fruit to before it leaves our farm.
+    </p>
+    <a href="#about" class="btn-primary" style="margin-top:10px;display:inline-flex;">Learn Our Story</a>
+  </div>
+  <div class="why-cards">
+    <!-- <div class="why-card">
+      <div class="why-icon">🧪</div>
+      <h4>Lab Tested</h4>
+      <p>Every batch is tested for pesticide residue by a certified FSSAI lab before dispatch.</p>
+    </div> -->
+    <div class="why-card">
+      <div class="why-icon">🌍</div>
+      <h4>Sustainable Farming</h4>
+      <p>We use drip irrigation, rainwater harvesting, and zero plastic in our orchards.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">🤝</div>
+      <h4>Farmer First</h4>
+      <p>We pay our farmers 40% above market rate. Ethical supply chain, every link.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">🔄</div>
+      <h4>Freshness Guarantee</h4>
+      <p>Not happy with your order? We replace it free, no questions asked.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<div class="cta-band" id="order">
+  <div class="cta-text">
+    <h2>Ready for fruits that actually <em>taste</em> like fruits?</h2>
+    <p>Place your first order today. Free delivery on orders above ₹499. Pan-India shipping available.</p>
+  </div>
+  <div class="cta-actions">
+    <a href="tel:+918983116858" class="btn-large">📞 Call to Order</a>
+    <span class="cta-sub">or WhatsApp us at +91 89831 16858</span>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer id="contact">
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="logo-icon">🍃</div>
+      <h3>Satvik Fruits Supplier</h3>
+      <p>Pure fruits from our orchards to your table. Grown with care, delivered with love.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Our Fruits</h4>
+      <ul>
+        <li><a href="#">Alphonso Mangoes</a></li>
+        <li><a href="#">Dasehri Mango</a></li>
+        <li><a href="#">Devgad Alphonso </a></li>
+        <li><a href="#">Maida Mango</a></li>
+        <li><a href="#">Ratnagiri Kesar</a></li>
+        <li><a href="#">Malika Mango</a></li>
+        <li><a href="#">Chausa</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#">Our Story</a></li>
+        <li><a href="#">Farm Tour</a></li>
+        <li><a href="#">Sustainability</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Press</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="tel:+918983116858">+91 89831 16858</a></li>
+        <li><a href="#">Nitin hights mankar dosa satvik pavbhaji and juice bar near Dharmadhikari hospital Solapur road Hadapsar pune -411028</a></li>
+        <li><a href="https://wa.me/918975886858" target="_blank">WhatsApp Us +91  8975886858</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Satvik Fruits. All rights reserved.</span>
+    <!-- <div class="social-links">
+      <a href="#" class="social-btn">📘</a>
+      <a href="#" class="social-btn">📸</a>
+      <a href="#" class="social-btn">🐦</a>
+      <a href="#" class="social-btn">▶️</a>
+    </div> -->
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.product-card, .process-step, .review-card, .why-card').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(28px)';
+    el.style.transition = 'opacity 0.55s ease, transform 0.55s ease';
+    observer.observe(el);
+  });
+</script>
+
+</body>
+</html>
